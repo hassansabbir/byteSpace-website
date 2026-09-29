@@ -4,6 +4,8 @@ import * as React from 'react';
 import Link from 'next/link';
 import { Logo } from '@/components/common/logo';
 import { Container } from '@/components/common/container';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { navigationConfig } from '@/config/navigation';
 
 export function Footer() {
@@ -33,21 +35,24 @@ export function Footer() {
 
             <form onSubmit={handleSubmit} className="w-full max-w-md space-y-3">
               <div className="relative flex items-center">
-                <input
+                <Input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
                   required
                   aria-label="Email address for newsletter"
-                  className="w-full h-12 pl-5 pr-28 rounded-full border border-border bg-surface text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-sm"
+                  className="w-full h-12 pl-5 pr-28 rounded-full border border-border bg-surface text-sm text-foreground placeholder:text-muted-foreground shadow-sm"
                 />
-                <button
+                <Button
                   type="submit"
-                  className="absolute right-1.5 top-1.5 bottom-1.5 px-6 rounded-full bg-secondary text-secondary-foreground font-semibold text-sm hover:bg-secondary-hover transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-ring"
+                  variant="secondary"
+                  size="sm"
+                  rounded="full"
+                  className="absolute right-1.5 top-1.5 bottom-1.5 px-6 h-auto"
                 >
                   {subscribed ? 'Joined!' : 'Search'}
-                </button>
+                </Button>
               </div>
 
               <p className="text-xs text-muted-foreground leading-normal">

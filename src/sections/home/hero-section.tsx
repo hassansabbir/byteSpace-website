@@ -3,6 +3,10 @@
 import * as React from 'react';
 import Image from 'next/image';
 import { Search, Star } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import { heroAvatars, decorativeElements } from '@/data/hero';
 
 const DOME_BLUR = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M/wHwAE/gH/5mZ3GQAAAABJRU5ErkJggg==';
@@ -34,8 +38,8 @@ export function HeroSection() {
           <Image
             src={item.src}
             alt=""
-            width={item.w}
-            height={item.h}
+            width={item.width}
+            height={item.height}
             loading="lazy"
             className="w-full h-auto object-contain block opacity-95 transition-opacity duration-300"
           />
@@ -67,21 +71,22 @@ export function HeroSection() {
           style={{ width: 'clamp(280px,42vw,540px)', padding: '8px 8px 8px 20px' }}
         >
           <Search className="h-4 w-4 text-gray-400 mr-3 shrink-0 stroke-2" />
-          <input
+          <Input
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Course, topic, creator"
             aria-label="Search courses"
-            className="w-full bg-transparent text-[13.5px] text-gray-800 placeholder:text-gray-400 focus:outline-none"
+            className="w-full bg-transparent border-0 text-[13.5px] text-gray-800 placeholder:text-gray-400 focus-visible:ring-0 px-0 h-auto shadow-none"
           />
-          <button
+          <Button
             type="submit"
-            className="shrink-0 rounded-full bg-secondary text-secondary-foreground font-semibold text-[13.5px] hover:opacity-90 transition-opacity focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-            style={{ padding: '9px 26px' }}
+            variant="secondary"
+            rounded="full"
+            className="shrink-0 text-[13.5px] px-6 py-2.5 h-auto"
           >
             Search
-          </button>
+          </Button>
         </form>
       </div>
 
@@ -123,18 +128,20 @@ export function HeroSection() {
             />
           </div>
 
-          <div
-            className="absolute bg-white rounded-2xl shadow-[0_8px_28px_rgba(0,0,0,.16)] border border-white/60"
+          <Card
+            variant="floating"
+            className="absolute"
             style={{ zIndex: 30, top: '30%', left: '4%', padding: '13px 18px', minWidth: 'clamp(140px,14vw,195px)' }}
           >
             <p className="text-sm font-bold text-gray-900 leading-none">UI/UX Design</p>
             <p className="mt-[5px] text-[11.5px] font-medium text-gray-500 whitespace-nowrap">
               200 Courses&nbsp;&bull;&nbsp;1000+ Students
             </p>
-          </div>
+          </Card>
 
-          <div
-            className="absolute bg-white rounded-2xl shadow-[0_8px_28px_rgba(0,0,0,.16)] border border-white/60"
+          <Card
+            variant="floating"
+            className="absolute"
             style={{ zIndex: 30, top: '26%', right: '3%', padding: '14px 20px', minWidth: 'clamp(145px,14vw,195px)' }}
           >
             <p className="text-[11.5px] font-medium text-gray-500 leading-none">Learning Progress</p>
@@ -147,10 +154,11 @@ export function HeroSection() {
             <div className="mt-3 w-full rounded-full overflow-hidden bg-gray-100" style={{ height: 6 }}>
               <div className="h-full rounded-full bg-secondary" style={{ width: '55%' }} />
             </div>
-          </div>
+          </Card>
 
-          <div
-            className="absolute bg-white rounded-2xl shadow-[0_8px_28px_rgba(0,0,0,.16)] border border-white/60"
+          <Card
+            variant="floating"
+            className="absolute"
             style={{ zIndex: 30, top: '60%', left: '5%', padding: '12px 16px', minWidth: 'clamp(160px,16vw,220px)' }}
           >
             <p className="text-sm font-bold text-gray-900 leading-none">Happy Students</p>
@@ -165,11 +173,14 @@ export function HeroSection() {
                   <Image src={src} alt="Student avatar" fill sizes="28px" className="object-cover" />
                 </div>
               ))}
-              <div className="h-7 px-2 ml-1 rounded-full bg-secondary text-secondary-foreground border-2 border-white text-[10px] font-extrabold flex items-center justify-center shrink-0">
+              <Badge
+                variant="secondary"
+                className="h-7 px-2 ml-1 rounded-full border-2 border-white text-[10px] font-extrabold flex items-center justify-center shrink-0"
+              >
                 2K+
-              </div>
+              </Badge>
             </div>
-          </div>
+          </Card>
         </div>
       </div>
     </section>

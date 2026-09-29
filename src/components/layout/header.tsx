@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { ShoppingBag, Menu, X } from 'lucide-react';
 import { Logo } from '@/components/common/logo';
 import { Container } from '@/components/common/container';
+import { Button } from '@/components/ui/button';
 import { navigationConfig } from '@/config/navigation';
 import { cn } from '@/lib/utils';
 import { ROUTES } from '@/constants/routes';
@@ -101,10 +102,12 @@ export function Header() {
               <ShoppingBag className="h-5 w-5 stroke-[1.8]" />
             </Link>
 
-            <button
+            <Button
               type="button"
+              variant="ghost"
+              size="icon"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-1.5 text-white hover:text-white/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary rounded-md"
+              className="text-white hover:bg-white/10 hover:text-white border-0"
               aria-expanded={mobileMenuOpen}
               aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
             >
@@ -113,7 +116,7 @@ export function Header() {
               ) : (
                 <Menu className="h-6 w-6 stroke-[2]" />
               )}
-            </button>
+            </Button>
           </div>
         </div>
       </Container>
@@ -135,17 +138,15 @@ export function Header() {
           </div>
 
           <div className="pt-6 border-t border-white/10 flex flex-col gap-3">
-            <Link
-              href={navigationConfig.authNav.login.href}
-              className="w-full py-3 text-center text-sm font-semibold text-white border border-white/20 rounded-lg hover:bg-white/10 transition-colors"
-            >
-              {navigationConfig.authNav.login.title}
+            <Link href={navigationConfig.authNav.login.href} className="w-full">
+              <Button variant="outline" size="lg" className="w-full text-white border-white/20 hover:bg-white/10">
+                {navigationConfig.authNav.login.title}
+              </Button>
             </Link>
-            <Link
-              href={navigationConfig.authNav.register.href}
-              className="w-full py-3 text-center text-sm font-semibold text-secondary-foreground bg-secondary rounded-lg hover:bg-secondary-hover transition-colors"
-            >
-              {navigationConfig.authNav.register.title}
+            <Link href={navigationConfig.authNav.register.href} className="w-full">
+              <Button variant="secondary" size="lg" className="w-full">
+                {navigationConfig.authNav.register.title}
+              </Button>
             </Link>
           </div>
         </div>
