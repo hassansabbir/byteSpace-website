@@ -5,7 +5,8 @@ import { Loader2 } from 'lucide-react';
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'icon';
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg' | 'icon';
+  rounded?: 'default' | 'full';
   isLoading?: boolean;
 }
 
@@ -15,6 +16,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       className,
       variant = 'primary',
       size = 'md',
+      rounded = 'default',
       isLoading = false,
       disabled,
       children,
@@ -35,20 +37,32 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       ghost:
         'hover:bg-muted text-foreground',
       icon:
-        'border border-border bg-surface hover:bg-muted text-foreground rounded-full',
+        'border border-border bg-surface hover:bg-muted text-foreground',
+    };
+
+    const roundedStyles = {
+      default: size === 'icon' || variant === 'icon' ? 'rounded-full' : size === 'lg' ? 'rounded-lg' : 'rounded-md',
+      full: 'rounded-full',
     };
 
     const sizes = {
-      sm: variant === 'icon' ? 'h-8 w-8 p-0 rounded-full' : 'h-8 px-3 text-xs rounded-md gap-1.5',
-      md: variant === 'icon' ? 'h-10 w-10 p-0 rounded-full' : 'h-10 px-4 text-sm rounded-md gap-2',
-      lg: variant === 'icon' ? 'h-12 w-12 p-0 rounded-full' : 'h-12 px-6 text-base rounded-lg gap-2.5',
+      sm: 'h-8 px-3 text-xs gap-1.5',
+      md: 'h-10 px-4 text-sm gap-2',
+      lg: 'h-12 px-6 text-base gap-2.5',
+      icon: 'h-9 w-9 p-0',
     };
 
     return (
       <button
         ref={ref}
         disabled={disabled || isLoading}
-        className={cn(baseStyles, variants[variant], sizes[size], className)}
+        className={cn(
+          baseStyles,
+          variants[variant],
+          sizes[size],
+          roundedStyles[rounded],
+          className
+        )}
         {...props}
       >
         {isLoading && (
