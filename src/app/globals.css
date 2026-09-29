@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* -------------------------------------------------------------
+       CENTRALIZED THEME DESIGN TOKENS
+       Changing the RGB values here updates the theme across the app.
+       ------------------------------------------------------------- */
+
+    /* Primary Brand Identity: Royal Blue */
+    --color-primary: 26 86 219;          /* #1A56DB */
+    --color-primary-hover: 29 78 216;    /* #1D4ED8 */
+    --color-primary-foreground: 255 255 255;
+
+    /* Secondary Accent: Electric Lime / Chartreuse */
+    --color-secondary: 204 255 0;        /* #CCFF00 */
+    --color-secondary-hover: 188 235 0;  /* #BCEB00 */
+    --color-secondary-foreground: 15 23 42; /* #0F172A */
+
+    /* Neutrals / Base Canvas */
+    --color-background: 255 255 255;     /* #FFFFFF */
+    --color-foreground: 15 23 42;        /* #0F172A */
+
+    /* Surface Tokens (Cards, Panels, Modals) */
+    --color-surface: 255 255 255;
+    --color-surface-muted: 248 250 252;  /* #F8FAFC */
+    --color-surface-foreground: 15 23 42;
+
+    /* Muted Elements */
+    --color-muted: 241 245 249;          /* #F1F5F9 */
+    --color-muted-foreground: 100 116 139; /* #64748B */
+
+    /* Borders & Dividers */
+    --color-border: 226 232 240;        /* #E2E8F0 */
+    --color-border-hover: 203 213 225;  /* #CBD5E1 */
+
+    /* Focus Ring */
+    --color-ring: 26 86 219;
+
+    /* Semantic Status Tokens */
+    --color-destructive: 239 68 68;      /* #EF4444 */
+    --color-destructive-foreground: 255 255 255;
+    --color-success: 34 197 94;          /* #22C55E */
+    --color-success-foreground: 255 255 255;
+    --color-warning: 234 179 8;          /* #EAB308 */
+    --color-warning-foreground: 15 23 42;
+
+    /* Radius Tokens */
+    --radius-sm: 0.375rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+    --radius-full: 9999px;
+  }
+
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    min-height: 100vh;
+  }
+}
