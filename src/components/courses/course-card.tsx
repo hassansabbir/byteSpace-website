@@ -105,7 +105,8 @@ export function CourseCard({
         )}
 
         {(showLevel || showAvatars) && (
-          <div className="mt-5 flex items-center justify-between gap-2">
+          <div className="mt-5 flex items-center
+           gap-2">
             {showLevel ? (
               <div className="inline-flex items-center gap-2 rounded-full bg-[#f1f3f5] px-3.5 py-1.5 text-xs sm:text-sm font-medium text-slate-700">
                 <LevelIndicator className="h-3.5 w-3.5 text-slate-700" />

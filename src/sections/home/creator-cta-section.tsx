@@ -17,25 +17,27 @@ export function CreatorCtaSection() {
         }}
       />
 
-      <div className="absolute left-0 top-0 bottom-0 pointer-events-none z-10 w-[130px] sm:w-[170px] md:w-[210px] lg:w-[250px]">
+      <div className="absolute left-0 top-0 bottom-0 pointer-events-none z-10 w-[130px] sm:w-[170px] md:w-[220px] lg:w-[270px] xl:w-[320px]">
         <Image
           src="/images/Home/creator-cta-left.webp"
           alt=""
           aria-hidden="true"
           fill
           className="object-contain object-left"
-          sizes="(max-width: 768px) 170px, 250px"
+          sizes="(max-width: 768px) 170px, (max-width: 1280px) 270px, 320px"
+          priority
         />
       </div>
 
-      <div className="absolute right-0 top-0 bottom-0 pointer-events-none z-10 w-[140px] sm:w-[180px] md:w-[220px] lg:w-[260px]">
+      <div className="absolute right-0 top-0 bottom-0 pointer-events-none z-10 w-[130px] sm:w-[170px] md:w-[220px] lg:w-[270px] xl:w-[320px]">
         <Image
           src="/images/Home/creator-cta-right.webp"
           alt=""
           aria-hidden="true"
           fill
           className="object-contain object-right"
-          sizes="(max-width: 768px) 180px, 260px"
+          sizes="(max-width: 768px) 170px, (max-width: 1280px) 270px, 320px"
+          priority
         />
       </div>
 

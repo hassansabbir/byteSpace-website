@@ -18,8 +18,8 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative w-full bg-primary overflow-hidden"
-      style={{ height: 'calc(100dvh - 4rem)' }}
+      className="relative w-full bg-primary overflow-hidden min-h-[660px]"
+      style={{ height: '100dvh' }}
     >
       <div
         aria-hidden="true"
@@ -48,7 +48,7 @@ export function HeroSection() {
 
       <div
         className="relative flex flex-col items-center text-center px-4"
-        style={{ zIndex: 10, paddingTop: 'clamp(1.75rem,5vh,3.5rem)' }}
+        style={{ zIndex: 10, paddingTop: 'calc(4.5rem + clamp(1.5rem, 4vh, 3rem))' }}
       >
         <h1
           className="font-bold text-white tracking-tight leading-[1.12] max-w-[900px]"

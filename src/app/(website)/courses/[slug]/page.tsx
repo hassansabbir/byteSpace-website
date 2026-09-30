@@ -1,4 +1,7 @@
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import { getCourseDetailBySlug } from '@/data/course-details';
+import { CourseDetailsSection } from '@/sections/courses/course-details-section';
 
 interface CourseDetailPageProps {
   params: {
@@ -7,20 +10,24 @@ interface CourseDetailPageProps {
 }
 
 export function generateMetadata({ params }: CourseDetailPageProps): Metadata {
-  const formattedTitle = params.slug
-    .split('-')
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
+  const course = getCourseDetailBySlug(params.slug);
 
   return {
-    title: formattedTitle || 'Course Details',
-    description: 'Learn in-depth skills with this comprehensive course on ByteSpace.',
+    title: `${course.title} — ByteSpace`,
+    description: course.subtitle,
   };
 }
 
 export default function CourseDetailPage({ params }: CourseDetailPageProps) {
+  const course = getCourseDetailBySlug(params.slug);
+
+  if (!course) {
+    notFound();
+  }
+
   return (
-    <main>
+    <main className="w-full">
+      <CourseDetailsSection course={course} />
     </main>
   );
 }

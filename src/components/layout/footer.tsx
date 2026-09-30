@@ -23,18 +23,18 @@ export function Footer() {
   return (
     <footer className="w-full bg-surface border-t border-border pt-16 pb-12 transition-colors">
       <Container size="xl">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 pb-16">
-          <div className="lg:col-span-5 flex flex-col space-y-5">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 pb-16">
+          <div className="flex flex-col space-y-5">
             <div>
               <Logo inverse={false} size="md" />
             </div>
 
-            <p className="text-sm text-muted-foreground max-w-sm leading-relaxed">
+            <p className="text-sm text-muted-foreground max-w-xl leading-relaxed">
               Stay Up to date with our latest features and releases by joining our newsletter.
             </p>
 
-            <form onSubmit={handleSubmit} className="w-full max-w-md space-y-3">
-              <div className="relative flex items-center">
+            <form onSubmit={handleSubmit} className="w-full max-w-lg space-y-3.5">
+              <div className="flex items-center gap-3.5">
                 <Input
                   type="email"
                   value={email}
@@ -42,22 +42,21 @@ export function Footer() {
                   placeholder="Enter your email"
                   required
                   aria-label="Email address for newsletter"
-                  className="w-full h-12 pl-5 pr-28 rounded-full border border-border bg-surface text-sm text-foreground placeholder:text-muted-foreground shadow-sm"
+                  className="h-11 sm:h-12 w-full max-w-[360px] sm:max-w-[380px] px-5 rounded-full border border-gray-300 dark:border-border bg-transparent text-sm text-foreground placeholder:text-muted-foreground focus-visible:ring-1 focus-visible:ring-foreground shadow-none"
                 />
                 <Button
                   type="submit"
                   variant="secondary"
-                  size="sm"
                   rounded="full"
-                  className="absolute right-1.5 top-1.5 bottom-1.5 px-6 h-auto"
+                  className="h-11 sm:h-12 px-7 sm:px-8 text-sm font-semibold text-secondary-foreground shadow-none shrink-0 hover:bg-secondary/90"
                 >
                   {subscribed ? 'Joined!' : 'Search'}
                 </Button>
               </div>
 
-              <p className="text-xs text-muted-foreground leading-normal">
+              <p className="text-xs text-muted-foreground leading-normal max-w-md">
                 By subscribing, you agree to our{' '}
-                <Link href="#" className="underline hover:text-foreground transition-colors">
+                <Link href="#" className="hover:text-foreground transition-colors">
                   Privacy Policy
                 </Link>{' '}
                 and consent to receive updates from our company.
@@ -65,10 +64,10 @@ export function Footer() {
             </form>
           </div>
 
-          <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-8">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 sm:gap-10">
             {navigationConfig.footerNav.map((column, idx) => (
-              <div key={idx} className="space-y-3">
-                <ul className="space-y-3">
+              <div key={idx}>
+                <ul className="space-y-4">
                   {column.items.map((item, itemIdx) => (
                     <li key={itemIdx}>
                       <Link
@@ -86,7 +85,7 @@ export function Footer() {
         </div>
 
         <div className="pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
-          <p>&copy; 2023 ByteSpace. All rights reserved.</p>
+          <p>&reg; 2023 ByteSpace. All rights reserved.</p>
 
           <div className="flex flex-wrap items-center gap-6">
             <Link href="#" className="hover:text-foreground transition-colors">

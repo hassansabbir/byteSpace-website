@@ -13,6 +13,7 @@ import { ROUTES } from '@/constants/routes';
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+  const [isScrolled, setIsScrolled] = React.useState(false);
   const pathname = usePathname();
 
   React.useEffect(() => {
@@ -30,8 +31,29 @@ export function Header() {
     };
   }, [mobileMenuOpen]);
 
+  React.useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const isSolid = isScrolled || mobileMenuOpen;
+
   return (
-    <header className="sticky top-0 z-50 w-full bg-primary border-b border-white/10 transition-colors">
+    <header
+      className={cn(
+        'fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ease-in-out',
+        isSolid
+          ? 'bg-primary/95 backdrop-blur-md border-b border-white/10 shadow-md'
+          : 'bg-transparent border-b border-transparent shadow-none'
+      )}
+    >
       <Container size="xl">
         <div className="flex h-16 sm:h-18 items-center justify-between">
           <div className="flex items-center shrink-0">
