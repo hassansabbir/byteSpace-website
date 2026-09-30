@@ -1,159 +1,145 @@
-# ByteSpace — Online Course & Learning Platform
+# ByteSpace — Frontend Job Task Submission
 
-ByteSpace is a modern, high-performance online course and digital learning platform built with **Next.js (App Router)**, **React**, **TypeScript**, and **Tailwind CSS**.
+This repository contains the frontend implementation of the ByteSpace website, developed from the provided Figma design as part of the frontend developer job task.
 
-🔗 **Live Demo:** [https://byte-space-website.vercel.app](https://byte-space-website.vercel.app)
-
----
-
-## 🛠️ Technology Stack
-
-| Technology | Purpose | Specification |
-| :--- | :--- | :--- |
-| **Next.js** | Core Framework | App Router, Server Components by default, Route Groups |
-| **React** | UI Library | React 18 with modern hooks & forwardRef primitives |
-| **TypeScript** | Type System | Strict mode (`strict: true`), zero `any` tolerance |
-| **Tailwind CSS** | Styling Engine | CSS Variables token integration with semantic utility classes |
-| **ESLint** | Code Quality | Next.js core web vitals and strict linting rules |
-| **Lucide React** | Icons | Scalable, accessible icon primitives |
+- **Live URL:** [https://byte-space-website.vercel.app](https://byte-space-website.vercel.app)
+- **Repository:** [https://github.com/hassansabbir/byteSpace-website](https://github.com/hassansabbir/byteSpace-website)
+- **Pull Request:** [`dev` → `main` PR](https://github.com/hassansabbir/byteSpace-website/pulls)
 
 ---
 
-## ✨ Features & Highlights
+## 📌 Project Overview
 
-- **Pixel-Perfect Hero Section**: Custom responsive dome layout featuring course discovery search, interactive learning progress indicators, and student satisfaction metrics.
-- **Optimized Media Delivery**: Pre-optimized image assets with blur placeholders (`blurDataURL`), eager LCP prioritization, and modern WebP/AVIF format support.
-- **Trusted Partners Strip**: Dynamic company logo carousel strip matching brand specifications with grayscale-to-color hover transitions.
-- **Fully Responsive Navigation**: Fixed header with mobile drawer menu, route highlighting, and smooth transitions.
-- **Strict Codebase Standards**: Clean separation of concerns with dedicated domain types (`src/types/`), isolated datasets (`src/data/`), self-documenting code, and zero files exceeding 200 lines.
-- **Accessible (WCAG 2.1 AA)**: Semantic HTML5 landmarks, keyboard navigation focus rings, and proper ARIA labeling.
+The task was to build the ByteSpace online learning platform from the Figma design. The required scope was the full landing page. In addition to the landing page, the bonus authentication pages and additional platform pages were also implemented:
+
+### Implemented Pages:
+- **Landing Page (Required):**
+  - Hero section with course search, student illustration, and floating stat cards
+  - Trusted partners logo strip
+  - Featured courses grid
+  - Learning paths section
+  - Creator call-to-action section
+  - Testimonials
+  - Responsive header with mobile navigation menu and global footer
+- **Courses Catalog (`/courses`):** Course listing with category filters, difficulty levels, sort options, and search query handling.
+- **Course Detail (`/courses/[slug]`):** Individual course page with video preview player, curriculum breakdown accordion, instructor summary, and enrollment sidebar.
+- **Creators Directory & Profile (`/creators`, `/creators/[slug]`):** Instructor listings and dedicated creator profile page with bio, stats, and courses.
+- **Login & Register (`/login`, `/register`) (Bonus):** Authentication pages matching the Figma split-screen layout.
+- **Search (`/search`) & Custom 404:** Search results route and custom not-found page.
 
 ---
 
-## 🏛️ Architecture Overview
+## 🛠️ Technologies Used
 
-The codebase is organized with strict separation of concerns:
-- **Routing & Composition in `src/app/`**: Next.js route groups (`(auth)` and `(website)`) handle routing, metadata, and page composition.
-- **UI Primitives in `src/components/ui/`**: Atomic, reusable interface components (`Button`, `Input`, `Card`, `Badge`).
-- **Common Primitives in `src/components/common/`**: Layout and structural elements (`Container`, `Section`, `SectionHeading`, `PageHeading`, `Logo`).
-- **Page Sections in `src/sections/`**: Feature-level page sections (`home`, `courses`, `auth`) composed cleanly inside routes.
-- **Centralized Tokens in `src/config/` & `src/app/globals.css`**: Single source of truth for brand colors and theme tokens.
+- **Framework:** Next.js 14 (App Router)
+- **Library:** React 18
+- **Language:** TypeScript (strict type checking)
+- **Styling:** Tailwind CSS (configured with design system colors and tokens)
+- **Icons:** Lucide React
+- **Deployment:** Vercel
+
+---
+
+## 🌿 Git Branching & Workflow
+
+As specified in the task guidelines:
+- The **`main`** branch contains the initial project setup, dependencies, and baseline architecture.
+- All development and feature implementation were completed on the **`dev`** branch.
+- A **Pull Request** has been opened from `dev` to `main`. All commits, section progress, and code changes can be reviewed in the **Pull Requests** tab on GitHub.
+
+---
+
+## 📁 Project Structure
 
 ```text
-ByteSpace-Website/
-├── public/                   # Static media, company logos, and avatars
-│   ├── fonts/
-│   ├── icons/
-│   ├── images/
-│   │   └── Home/
-│   │       ├── company-logos/
-│   │       └── hero/
-│   └── logos/
-├── src/
-│   ├── app/                  # Next.js App Router (pages, layouts, metadata)
-│   │   ├── (auth)/           # /login, /register
-│   │   ├── (website)/        # /, /search, /courses, /courses/[slug]
-│   │   ├── globals.css       # Centralized theme tokens & CSS variables
-│   │   ├── layout.tsx        # Global root layout (Inter font, SEO metadata)
-│   │   └── not-found.tsx     # Custom 404 error experience
-│   ├── components/
-│   │   ├── common/           # Container, Section, Headings, Logo
-│   │   ├── layout/           # Global shell components (Header, Footer)
-│   │   └── ui/               # Button, Input, Card, Badge primitives
-│   ├── config/               # site.ts, theme.ts, navigation.ts
-│   ├── constants/            # routes.ts
-│   ├── data/                 # Company logos, hero data, course mock data
-│   ├── hooks/                # Custom React hooks
-│   ├── lib/                  # Utilities (cn, formatters)
-│   ├── sections/             # Page sections (hero-section, trusted-by-section)
-│   ├── styles/               # Supplementary styles
-│   └── types/                # Domain models & TypeScript interfaces
-├── .env.example              # Environment variables template
-├── .eslintrc.json            # ESLint configuration
-├── next.config.mjs           # Next.js configuration
-├── package.json              # Project scripts and dependencies
-├── tailwind.config.ts        # Tailwind theme token mappings
-└── tsconfig.json             # Strict TypeScript configuration
+src/
+├── app/                        # Next.js App Router
+│   ├── (auth)/
+│   │   ├── login/page.tsx      # Login page (bonus)
+│   │   └── register/page.tsx   # Register page (bonus)
+│   ├── (website)/
+│   │   ├── page.tsx            # Landing page (required)
+│   │   ├── courses/
+│   │   │   ├── page.tsx        # Courses catalog
+│   │   │   └── [slug]/page.tsx # Course details & curriculum
+│   │   ├── creators/
+│   │   │   ├── page.tsx        # Creators directory
+│   │   │   └── [slug]/page.tsx # Creator profile
+│   │   └── search/page.tsx     # Search results
+│   ├── globals.css             # Theme colors & CSS variables
+│   ├── layout.tsx              # Root layout & font configuration
+│   └── not-found.tsx           # Custom 404 page
+│
+├── components/
+│   ├── layout/                 # Header (desktop & mobile drawer), Footer
+│   ├── ui/                     # Reusable UI primitives (Button, Input, Card, Badge)
+│   ├── common/                 # Container, SectionHeading, Logo
+│   ├── courses/                # CourseCard, VideoPlayer, LessonsAccordion
+│   └── auth/                   # AuthBranding, AuthCollage, AuthSocialButtons
+│
+├── sections/                   # Page-level section components
+│   ├── home/                   # Hero, TrustedBy, FeaturedCourses, LearningPaths, Testimonials
+│   ├── courses/                # Catalog and course detail sections
+│   └── creator/                # Creator catalog and profile sections
+│
+├── config/                     # Site configuration, theme tokens, navigation links
+├── constants/                  # Route constants
+├── data/                       # Mock data (courses, creators, partners)
+├── types/                      # TypeScript interfaces and types
+├── hooks/                      # Custom React hooks
+└── lib/                        # Utility functions (cn helper)
 ```
 
 ---
 
-## 🎨 Centralized Design System & Tokens
-
-Brand and semantic colors are defined as CSS variables in `src/app/globals.css` and mapped to Tailwind utilities:
-
-```css
-:root {
-  --color-primary: 26 86 219;          /* #1A56DB - Royal Blue */
-  --color-secondary: 204 255 0;        /* #CCFF00 - Electric Lime */
-  --color-background: 255 255 255;     /* #FFFFFF */
-  --color-foreground: 15 23 42;        /* #0F172A */
-  --color-surface: 255 255 255;
-  --color-muted: 241 245 249;          /* #F1F5F9 */
-  --color-border: 226 232 240;        /* #E2E8F0 */
-}
-```
-
-Updating tokens in `globals.css` dynamically cascades across buttons, badges, headings, cards, and backgrounds across the entire application.
-
----
-
-## 🚀 Getting Started
+## 🚀 How to Run Locally
 
 ### Prerequisites
+- Node.js (v18.18 or higher)
+- npm
 
-- **Node.js**: v18.18+ or v20+ (Node v24 supported)
-- **Package Manager**: `npm` (v10+)
+### Steps
 
-### Installation
-
-1. Clone the repository:
+1. **Clone the repository:**
    ```bash
    git clone https://github.com/hassansabbir/byteSpace-website.git
    cd byteSpace-website
    ```
 
-2. Copy the environment variables:
+2. **Check out the `dev` branch:**
    ```bash
-   cp .env.example .env.local
+   git checkout dev
    ```
 
-3. Install dependencies:
+3. **Install dependencies:**
    ```bash
    npm install
    ```
 
-4. Start the local development server:
+4. **Start the development server:**
    ```bash
    npm run dev
    ```
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+5. **Open in browser:**
+   Visit [http://localhost:3000](http://localhost:3000). No environment variables are required to run the project.
 
 ---
 
 ## 📋 Available Scripts
 
-| Script | Command | Purpose |
-| :--- | :--- | :--- |
-| `dev` | `npm run dev` | Starts local Next.js development server on port 3000 |
-| `build` | `npm run build` | Compiles optimized production bundle with type validation |
-| `start` | `npm run start` | Runs the production build locally |
-| `lint` | `npm run lint` | Runs ESLint against all source files (`next lint`) |
-| `type-check` | `npm run type-check` | Runs strict TypeScript verification (`tsc --noEmit`) |
+- `npm run dev` — Starts the development server at localhost:3000.
+- `npm run build` — Builds the application for production (runs type checks and linting).
+- `npm run start` — Runs the compiled production build locally.
+- `npm run lint` — Runs ESLint checks.
 
 ---
 
-## 🧭 Application Routes
+## 🔍 How to Review
 
-All routes are centralized in `@/constants/routes.ts`:
-
-| Route Path | File Location | Description |
-| :--- | :--- | :--- |
-| `/` | `src/app/(website)/page.tsx` | Platform Landing & Hero Page |
-| `/courses` | `src/app/(website)/courses/page.tsx` | Course Catalog & Discovery |
-| `/courses/[slug]` | `src/app/(website)/courses/[slug]/page.tsx` | Dynamic Course Details & Curriculum |
-| `/search` | `src/app/(website)/search/page.tsx` | Search and Filter Course Results |
-| `/login` | `src/app/(auth)/login/page.tsx` | User Authentication / Sign In |
-| `/register` | `src/app/(auth)/register/page.tsx` | User Registration / Join Platform |
-| `*` (404) | `src/app/not-found.tsx` | Custom 404 Not Found Page |
+1. **Live Deployment:** Open the [Vercel link](https://byte-space-website.vercel.app) to view the live site.
+2. **Landing Page:** Review the home page sections against the Figma design.
+3. **Bonus & Additional Pages:** Check `/courses`, `/courses/complete-web-development-bootcamp`, `/creators`, `/login`, and `/register`.
+4. **Mobile Responsiveness:** Test with DevTools at 375px (mobile), 768px (tablet), and 1280px+ (desktop).
+5. **Pull Request:** Open the **Pull Requests** tab in the GitHub repo to review the PR from `dev` to `main`, including commit history and diffs.
+6. **Build Verification:** Run `npm run build` to confirm the production build passes with zero errors.
