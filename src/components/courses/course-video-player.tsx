@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import Image from 'next/image';
 import { Play } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -17,20 +18,23 @@ export function CourseVideoPlayer({
 }: CourseVideoPlayerProps) {
   const videoRef = React.useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = React.useState(false);
+  const [hasStarted, setHasStarted] = React.useState(false);
 
-  const handlePlayToggle = () => {
+  const handlePlay = async () => {
     if (!videoRef.current) return;
-    if (isPlaying) {
-      videoRef.current.pause();
-    } else {
-      videoRef.current.play();
+    try {
+      setHasStarted(true);
+      await videoRef.current.play();
+      setIsPlaying(true);
+    } catch {
+      setIsPlaying(false);
     }
   };
 
   return (
     <div
       className={cn(
-        'group relative w-full aspect-[16/10] sm:aspect-video rounded-2xl sm:rounded-3xl overflow-hidden bg-slate-900 shadow-2xl border border-white/20',
+        'group relative w-full aspect-video rounded-2xl sm:rounded-3xl overflow-hidden bg-slate-900 shadow-2xl border border-white/20',
         className
       )}
     >
@@ -38,24 +42,45 @@ export function CourseVideoPlayer({
         ref={videoRef}
         src={videoSrc}
         poster={posterSrc}
-        controls={isPlaying}
+        controls={hasStarted}
         playsInline
         preload="metadata"
         onPlay={() => setIsPlaying(true)}
         onPause={() => setIsPlaying(false)}
-        onEnded={() => setIsPlaying(false)}
+        onEnded={() => {
+          setIsPlaying(false);
+          setHasStarted(false);
+        }}
         className="w-full h-full object-cover block"
       />
 
-      {!isPlaying && (
-        <button
-          type="button"
-          onClick={handlePlayToggle}
-          aria-label="Play course preview video"
-          className="absolute inset-0 m-auto h-18 w-18 sm:h-20 sm:w-20 md:h-22 md:w-22 rounded-full bg-white/40 backdrop-blur-md hover:bg-white/60 text-white flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-[0_10px_35px_rgba(0,0,0,0.3)] cursor-pointer z-10 border border-white/40 group-hover:bg-white/50"
+      {!hasStarted && (
+        <div
+          onClick={handlePlay}
+          className="absolute inset-0 z-10 cursor-pointer"
         >
-          <Play className="h-8 w-8 sm:h-9 sm:w-9 fill-white text-white ml-1 drop-shadow-sm" />
-        </button>
+          <Image
+            src={posterSrc}
+            alt="Course preview"
+            fill
+            priority
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 70vw, 800px"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors" />
+
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              handlePlay();
+            }}
+            aria-label="Play course preview video"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 sm:w-20 sm:h-20 rounded-full bg-white/90 hover:bg-white text-primary flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 shadow-[0_10px_35px_rgba(0,0,0,0.35)] cursor-pointer z-20 group-hover:scale-110"
+          >
+            <Play className="h-6 w-6 sm:h-8 sm:w-8 fill-primary text-primary ml-1" />
+          </button>
+        </div>
       )}
     </div>
   );
