@@ -31,7 +31,7 @@ export function CreatorProfileHero({
         }}
       />
 
-      <Container size="xl" className="relative z-10">
+      <Container size="lg" className="relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

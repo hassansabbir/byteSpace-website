@@ -34,7 +34,7 @@ export function CoursesCatalog() {
         onCategorySelect={setActiveCategory}
       />
 
-      <Container size="xl" className="pt-10 sm:pt-12 pb-20">
+      <Container size="lg" className="pt-10 sm:pt-12 pb-20">
         <CoursesCatalogFilters
           activeCategory={activeCategory}
           onCategorySelect={setActiveCategory}

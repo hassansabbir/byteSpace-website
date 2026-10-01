@@ -43,7 +43,7 @@ export function CreatorsCatalogHero({
         }}
       />
 
-      <Container size="xl" className="relative z-10">
+      <Container size="lg" className="relative z-10">
         <div className="flex flex-col items-center text-center max-w-3xl mx-auto px-4">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}

@@ -1,12 +1,10 @@
+'use client';
+
 import * as React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import {
-  FolderClosed,
-  Video,
-  Award,
-  Headphones,
-} from 'lucide-react';
+import { FolderClosed, Video, Award, Headphones, ChevronDown, ChevronRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { CourseDetailData } from '@/data/course-details';
 import { ROUTES } from '@/constants/routes';
@@ -16,8 +14,10 @@ export interface CourseEnrollmentCardProps {
 }
 
 export function CourseEnrollmentCard({ course }: CourseEnrollmentCardProps) {
+  const [includesOpen, setIncludesOpen] = React.useState(true);
+
   return (
-    <div className="bg-white rounded-3xl shadow-2xl border border-gray-100 p-6 sm:p-7 md:p-8 text-gray-900">
+    <div className="bg-white rounded-3xl shadow-2xl border border-gray-100 p-6 sm:p-7 text-gray-900">
       <h2 className="text-lg font-bold text-gray-900 tracking-tight">
         {course.lessonCountText} ({course.totalDurationText})
       </h2>
@@ -68,29 +68,53 @@ export function CourseEnrollmentCard({ course }: CourseEnrollmentCardProps) {
         Enroll Now
       </Button>
 
-      <div className="mt-7">
-        <h3 className="text-base font-bold text-gray-900">
-          This course include
-        </h3>
+      <div className="mt-7 border border-gray-100 rounded-2xl overflow-hidden">
+        <button
+          type="button"
+          onClick={() => setIncludesOpen((prev) => !prev)}
+          className="w-full flex items-center justify-between px-4 py-3.5 bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer"
+          aria-expanded={includesOpen}
+        >
+          <h3 className="text-sm font-bold text-gray-900">This course include</h3>
+          <motion.div
+            animate={{ rotate: includesOpen ? 0 : -90 }}
+            transition={{ duration: 0.25, ease: 'easeInOut' }}
+          >
+            <ChevronDown className="h-4 w-4 text-gray-500 stroke-[2.5]" />
+          </motion.div>
+        </button>
 
-        <ul className="mt-4 space-y-3">
-          <li className="flex items-center gap-3 text-sm font-medium text-gray-700">
-            <FolderClosed className="h-5 w-5 text-primary stroke-[1.8] shrink-0" />
-            <span>Learning Resources</span>
-          </li>
-          <li className="flex items-center gap-3 text-sm font-medium text-gray-700">
-            <Video className="h-5 w-5 text-primary stroke-[1.8] shrink-0" />
-            <span>Quality Lesson Videos</span>
-          </li>
-          <li className="flex items-center gap-3 text-sm font-medium text-gray-700">
-            <Award className="h-5 w-5 text-primary stroke-[1.8] shrink-0" />
-            <span>Certificate of Completion</span>
-          </li>
-          <li className="flex items-center gap-3 text-sm font-medium text-gray-700">
-            <Headphones className="h-5 w-5 text-primary stroke-[1.8] shrink-0" />
-            <span>Private Consultation</span>
-          </li>
-        </ul>
+        <AnimatePresence initial={false}>
+          {includesOpen && (
+            <motion.div
+              key="includes"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3, ease: [0.21, 0.47, 0.32, 0.98] }}
+              className="overflow-hidden"
+            >
+              <ul className="px-4 py-4 space-y-3">
+                <li className="flex items-center gap-3 text-sm font-medium text-gray-700">
+                  <FolderClosed className="h-5 w-5 text-primary stroke-[1.8] shrink-0" />
+                  <span>Learning Resources</span>
+                </li>
+                <li className="flex items-center gap-3 text-sm font-medium text-gray-700">
+                  <Video className="h-5 w-5 text-primary stroke-[1.8] shrink-0" />
+                  <span>Quality Lesson Videos</span>
+                </li>
+                <li className="flex items-center gap-3 text-sm font-medium text-gray-700">
+                  <Award className="h-5 w-5 text-primary stroke-[1.8] shrink-0" />
+                  <span>Certificate of Completion</span>
+                </li>
+                <li className="flex items-center gap-3 text-sm font-medium text-gray-700">
+                  <Headphones className="h-5 w-5 text-primary stroke-[1.8] shrink-0" />
+                  <span>Private Consultation</span>
+                </li>
+              </ul>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       <div className="border-t border-gray-100 my-6" />

@@ -61,7 +61,7 @@ export function Header() {
           : 'bg-transparent border-b border-transparent shadow-none'
       )}
     >
-      <Container size="xl">
+      <Container size="lg">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center shrink-0">
             <Logo inverse size="md" />

@@ -35,7 +35,7 @@ export function CreatorProfileSection({ creator }: CreatorProfileSectionProps) {
       />
 
       <section className="relative w-full bg-background pt-10 sm:pt-12 pb-24">
-        <Container size="xl">
+        <Container size="lg">
           <CreatorProfileFilters
             activeCategory={activeCategory}
             onCategorySelect={setActiveCategory}

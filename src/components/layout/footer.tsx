@@ -22,7 +22,7 @@ export function Footer() {
 
   return (
     <footer className="w-full bg-surface border-t border-border pt-16 pb-12 transition-colors">
-      <Container size="xl">
+      <Container size="lg">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 pb-16">
           <div className="flex flex-col space-y-5">
             <div>
