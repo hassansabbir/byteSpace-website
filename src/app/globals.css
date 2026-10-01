@@ -6,8 +6,8 @@
 
 @layer base {
   :root {
-    --color-primary: 26 86 219;
-    --color-primary-hover: 29 78 216;
+    --color-primary: 0 59 226;
+    --color-primary-hover: 0 51 199;
     --color-primary-foreground: 255 255 255;
 
     --color-secondary: 204 255 0;
@@ -27,7 +27,7 @@
     --color-border: 226 232 240;
     --color-border-hover: 203 213 225;
 
-    --color-ring: 26 86 219;
+    --color-ring: 0 59 226;
 
     --color-destructive: 239 68 68;
     --color-destructive-foreground: 255 255 255;

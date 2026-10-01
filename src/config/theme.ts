@@ -1,9 +1,9 @@
 export const THEME_CONFIG = {
   colors: {
     primary: {
-      rgb: '26 86 219',
-      hex: '#1A56DB',
-      hover: '#1D4ED8',
+      rgb: '0 59 226',
+      hex: '#003BE2',
+      hover: '#0033C7',
       foreground: '#FFFFFF',
     },
     secondary: {
