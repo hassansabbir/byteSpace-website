@@ -1,7 +1,10 @@
+'use client';
+
 import * as React from 'react';
 import Image from 'next/image';
 import { Check } from 'lucide-react';
 import { Container } from '@/components/common/container';
+import { MotionViewport } from '@/components/animations/motion-viewport';
 import { GROWTH_STATS, CREATOR_BENEFITS } from '@/data/ads';
 
 const BLUR_OVERLAY =
@@ -30,81 +33,89 @@ export function AdsSection() {
 
       <Container size="lg" className="relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-center">
-          <div className="flex flex-col justify-center max-w-xl">
-            <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold tracking-tight text-foreground leading-[1.15]">
-              Your Path to Professional
-              <span className="block mt-1">Growth Starts Here!</span>
-            </h2>
-            <p className="mt-4 sm:mt-5 text-sm sm:text-base text-muted-foreground leading-relaxed">
-              Explore our curated selection of courses tailored to enhance your capabilities and
-              accelerate your career journey. Whether you are looking to sharpen specific skills,
-              gain industry expertise, or embark on a new career path entirely, we have the
-              resources you need.
-            </p>
-            <div className="flex items-center gap-8 sm:gap-12 mt-7 sm:mt-9">
-              {GROWTH_STATS.map((stat) => (
-                <div key={stat.label}>
-                  <p className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-primary">
-                    {stat.value}
-                  </p>
-                  <p className="text-xs sm:text-sm font-medium text-muted-foreground mt-1">
-                    {stat.label}
-                  </p>
-                </div>
-              ))}
+          <MotionViewport direction="right" distance={40}>
+            <div className="flex flex-col justify-center max-w-xl">
+              <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold tracking-tight text-foreground leading-[1.15]">
+                Your Path to Professional
+                <span className="block mt-1">Growth Starts Here!</span>
+              </h2>
+              <p className="mt-4 sm:mt-5 text-sm sm:text-base text-muted-foreground leading-relaxed">
+                Explore our curated selection of courses tailored to enhance your capabilities and
+                accelerate your career journey. Whether you are looking to sharpen specific skills,
+                gain industry expertise, or embark on a new career path entirely, we have the
+                resources you need.
+              </p>
+              <div className="flex items-center gap-8 sm:gap-12 mt-7 sm:mt-9">
+                {GROWTH_STATS.map((stat) => (
+                  <div key={stat.label}>
+                    <p className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-primary">
+                      {stat.value}
+                    </p>
+                    <p className="text-xs sm:text-sm font-medium text-muted-foreground mt-1">
+                      {stat.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
+          </MotionViewport>
 
-          <div className="relative w-full max-w-[460px] lg:max-w-[490px] mx-auto lg:mr-0 flex items-center justify-center">
-            <Image
-              src="/images/ads/top-right-image.webp"
-              alt="Student learning with Figma course"
-              width={700}
-              height={694}
-              placeholder="blur"
-              blurDataURL={BLUR_TOP_RIGHT}
-              className="w-full h-auto object-contain"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
-          </div>
+          <MotionViewport direction="left" distance={40} delay={0.15}>
+            <div className="relative w-full max-w-[460px] lg:max-w-[490px] mx-auto lg:mr-0 flex items-center justify-center">
+              <Image
+                src="/images/ads/top-right-image.webp"
+                alt="Student learning with Figma course"
+                width={700}
+                height={694}
+                placeholder="blur"
+                blurDataURL={BLUR_TOP_RIGHT}
+                className="w-full h-auto object-contain"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
+          </MotionViewport>
         </div>
 
         <div className="mt-12 sm:mt-16 lg:mt-20 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-center">
-          <div className="order-2 lg:order-1 relative w-full max-w-[420px] lg:max-w-[450px] mx-auto lg:ml-0 flex items-center justify-center">
-            <Image
-              src="/images/ads/bottom-left-image.webp"
-              alt="Creator managing online courses"
-              width={600}
-              height={736}
-              placeholder="blur"
-              blurDataURL={BLUR_BOTTOM_LEFT}
-              className="w-full h-auto object-contain"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
-          </div>
+          <MotionViewport direction="right" distance={40} className="order-2 lg:order-1">
+            <div className="relative w-full max-w-[420px] lg:max-w-[450px] mx-auto lg:ml-0 flex items-center justify-center">
+              <Image
+                src="/images/ads/bottom-left-image.webp"
+                alt="Creator managing online courses"
+                width={600}
+                height={736}
+                placeholder="blur"
+                blurDataURL={BLUR_BOTTOM_LEFT}
+                className="w-full h-auto object-contain"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
+          </MotionViewport>
 
-          <div className="order-1 lg:order-2 flex flex-col justify-center max-w-xl lg:pl-4">
-            <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold tracking-tight text-foreground leading-[1.15]">
-              Create &amp; Manage
-              <span className="block mt-1">Courses Easily.</span>
-            </h2>
-            <p className="mt-4 sm:mt-5 text-sm sm:text-base text-muted-foreground leading-relaxed">
-              <span className="font-semibold text-foreground">ByteSpace</span> supports individuals
-              or entities in the creation, publication, and administration of educational courses.
-            </p>
-            <ul className="mt-6 sm:mt-8 space-y-3.5">
-              {CREATOR_BENEFITS.map((item) => (
-                <li key={item} className="flex items-center gap-3.5">
-                  <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center shrink-0">
-                    <Check className="w-3 h-3 text-white stroke-[3]" />
-                  </div>
-                  <span className="text-sm sm:text-base font-semibold text-foreground">
-                    {item}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <MotionViewport direction="left" distance={40} delay={0.15} className="order-1 lg:order-2">
+            <div className="flex flex-col justify-center max-w-xl lg:pl-4">
+              <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold tracking-tight text-foreground leading-[1.15]">
+                Create &amp; Manage
+                <span className="block mt-1">Courses Easily.</span>
+              </h2>
+              <p className="mt-4 sm:mt-5 text-sm sm:text-base text-muted-foreground leading-relaxed">
+                <span className="font-semibold text-foreground">ByteSpace</span> supports individuals
+                or entities in the creation, publication, and administration of educational courses.
+              </p>
+              <ul className="mt-6 sm:mt-8 space-y-3.5">
+                {CREATOR_BENEFITS.map((item) => (
+                  <li key={item} className="flex items-center gap-3.5">
+                    <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center shrink-0">
+                      <Check className="w-3 h-3 text-white stroke-[3]" />
+                    </div>
+                    <span className="text-sm sm:text-base font-semibold text-foreground">
+                      {item}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </MotionViewport>
         </div>
       </Container>
     </section>

@@ -4,6 +4,8 @@ import * as React from 'react';
 import { Container } from '@/components/common/container';
 import { CourseCategoryFilter } from '@/components/courses/course-category-filter';
 import { CourseCard } from '@/components/courses/course-card';
+import { MotionViewport } from '@/components/animations/motion-viewport';
+import { StaggerContainer, StaggerItem } from '@/components/animations/stagger-container';
 import { COURSES } from '@/data/courses';
 
 export function FeaturedCoursesSection() {
@@ -24,34 +26,39 @@ export function FeaturedCoursesSection() {
       className="w-full bg-background py-16 md:py-24"
     >
       <Container size="lg">
-        <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground leading-[1.2]">
-            Discover Your Passion,
-            <span className="block mt-1">Build Your Skills</span>
-          </h2>
-          <p className="mt-4 text-sm sm:text-base text-muted-foreground leading-relaxed max-w-2xl">
-            At Bytespace Courses, we bring you closer to life-changing knowledge. Explore a variety
-            of courses across different fields, from technology to the arts, and make a difference
-            in your career and life.
-          </p>
-        </div>
+        <MotionViewport direction="up" distance={28}>
+          <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground leading-[1.2]">
+              Discover Your Passion,
+              <span className="block mt-1">Build Your Skills</span>
+            </h2>
+            <p className="mt-4 text-sm sm:text-base text-muted-foreground leading-relaxed max-w-2xl">
+              At Bytespace Courses, we bring you closer to life-changing knowledge. Explore a variety
+              of courses across different fields, from technology to the arts, and make a difference
+              in your career and life.
+            </p>
+          </div>
+        </MotionViewport>
 
-        <div className="mt-8 md:mt-10">
+        <MotionViewport direction="up" distance={20} delay={0.15} className="mt-8 md:mt-10">
           <CourseCategoryFilter
             activeSlug={activeCategory}
             onSelectCategory={setActiveCategory}
           />
-        </div>
+        </MotionViewport>
 
-        <div className="mt-10 md:mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <StaggerContainer
+          key={activeCategory}
+          staggerDelay={0.08}
+          initialDelay={0.1}
+          className="mt-10 md:mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+        >
           {filteredCourses.map((course, index) => (
-            <CourseCard
-              key={course.id}
-              course={course}
-              priority={index < 3}
-            />
+            <StaggerItem key={course.id} direction="up" distance={24} scale>
+              <CourseCard course={course} priority={index < 3} />
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </Container>
     </section>
   );

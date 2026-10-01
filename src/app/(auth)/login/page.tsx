@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { AuthSocialButtons } from '@/components/auth/auth-social-buttons';
 import { ROUTES } from '@/constants/routes';
@@ -15,7 +16,12 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="w-full max-w-[480px] bg-white rounded-[32px] sm:rounded-[38px] shadow-2xl p-7 sm:p-10 md:p-12">
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95, y: 16 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: [0.21, 0.47, 0.32, 0.98] }}
+      className="w-full max-w-[480px] bg-white rounded-[32px] sm:rounded-[38px] shadow-2xl p-7 sm:p-10 md:p-12"
+    >
       <div className="mb-6 sm:mb-8">
         <span className="text-primary text-sm sm:text-base font-medium">
           Sign In
@@ -87,6 +93,6 @@ export default function LoginPage() {
           </Link>
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 }

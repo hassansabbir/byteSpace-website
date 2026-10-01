@@ -4,6 +4,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ShoppingBag, Menu, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Logo } from '@/components/common/logo';
 import { Container } from '@/components/common/container';
 import { Button } from '@/components/ui/button';
@@ -127,44 +128,52 @@ export function Header() {
         </div>
       </Container>
 
-      {mobileMenuOpen && (
-        <div className="md:hidden fixed inset-x-0 top-16 bottom-0 bg-primary z-50 flex flex-col justify-between p-6 overflow-y-auto border-t border-white/10">
-          <div className="space-y-6">
-            <nav className="flex flex-col space-y-2" aria-label="Mobile Navigation">
-              {navigationConfig.mainNav.map((item) => {
-                const isActive = item.href === ROUTES.HOME ? pathname === ROUTES.HOME : pathname.startsWith(item.href);
-                return (
-                  <Link
-                    key={item.title}
-                    href={item.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={cn(
-                      'text-base font-semibold py-3 border-b border-white/10 flex items-center justify-between transition-colors',
-                      isActive ? 'text-secondary' : 'text-white/90 hover:text-white'
-                    )}
-                  >
-                    <span>{item.title}</span>
-                    {isActive && <span className="w-2 h-2 rounded-full bg-secondary" />}
-                  </Link>
-                );
-              })}
-            </nav>
-          </div>
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+            className="md:hidden fixed inset-x-0 top-16 bottom-0 bg-primary z-50 flex flex-col justify-between p-6 overflow-y-auto border-t border-white/10"
+          >
+            <div className="space-y-6">
+              <nav className="flex flex-col space-y-2" aria-label="Mobile Navigation">
+                {navigationConfig.mainNav.map((item) => {
+                  const isActive = item.href === ROUTES.HOME ? pathname === ROUTES.HOME : pathname.startsWith(item.href);
+                  return (
+                    <Link
+                      key={item.title}
+                      href={item.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={cn(
+                        'text-base font-semibold py-3 border-b border-white/10 flex items-center justify-between transition-colors',
+                        isActive ? 'text-secondary' : 'text-white/90 hover:text-white'
+                      )}
+                    >
+                      <span>{item.title}</span>
+                      {isActive && <span className="w-2 h-2 rounded-full bg-secondary" />}
+                    </Link>
+                  );
+                })}
+              </nav>
+            </div>
 
-          <div className="pt-6 pb-2 border-t border-white/10 flex flex-col gap-3 shrink-0">
-            <Link href={navigationConfig.authNav.login.href} onClick={() => setMobileMenuOpen(false)}>
-              <Button variant="outline" size="lg" className="w-full text-white border-white/20 hover:bg-white/10 hover:text-white">
-                {navigationConfig.authNav.login.title}
-              </Button>
-            </Link>
-            <Link href={navigationConfig.authNav.register.href} onClick={() => setMobileMenuOpen(false)}>
-              <Button variant="secondary" size="lg" className="w-full font-semibold">
-                {navigationConfig.authNav.register.title}
-              </Button>
-            </Link>
-          </div>
-        </div>
-      )}
+            <div className="pt-6 pb-2 border-t border-white/10 flex flex-col gap-3 shrink-0">
+              <Link href={navigationConfig.authNav.login.href} onClick={() => setMobileMenuOpen(false)}>
+                <Button variant="outline" size="lg" className="w-full text-white border-white/20 hover:bg-white/10 hover:text-white">
+                  {navigationConfig.authNav.login.title}
+                </Button>
+              </Link>
+              <Link href={navigationConfig.authNav.register.href} onClick={() => setMobileMenuOpen(false)}>
+                <Button variant="secondary" size="lg" className="w-full font-semibold">
+                  {navigationConfig.authNav.register.title}
+                </Button>
+              </Link>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

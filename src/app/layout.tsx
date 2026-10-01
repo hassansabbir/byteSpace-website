@@ -34,6 +34,20 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     creator: '@bytespace',
   },
+  icons: {
+    icon: [
+      {
+        url: '/favicon.png',
+        type: 'image/png',
+      },
+      {
+        url: '/favicon.ico',
+        sizes: 'any',
+      },
+    ],
+    shortcut: '/favicon.png',
+    apple: '/favicon.png',
+  },
   robots: {
     index: true,
     follow: true,

@@ -4,7 +4,9 @@ import * as React from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Search, Star } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
+import { HeroParticles } from '@/components/home/hero-particles';
 import { heroAvatars } from '@/data/hero';
 import { ROUTES } from '@/constants/routes';
 
@@ -38,45 +40,32 @@ export function HeroSection() {
         }}
       />
 
-      {/* Decorative side particles — unified across all breakpoints */}
-      <div className="absolute inset-0 pointer-events-none select-none overflow-hidden z-0">
-        {/* Top-left lime hand */}
-        <div className="absolute top-40 -left-2 lg:left-0 w-20 sm:w-28 lg:w-44 xl:w-60 opacity-95">
-          <Image src="/images/Home/hero/left-top-elemtnt.png" alt="" width={500} height={724} quality={80} className="w-full h-auto" />
-        </div>
-        {/* Top-right lime cone */}
-        <div className="absolute top-40 -right-2 lg:right-0 w-20 sm:w-28 lg:w-44 xl:w-48 opacity-95">
-          <Image src="/images/Home/hero/right-top-element.png" alt="" width={852} height={1488} quality={80} className="w-full h-auto" />
-        </div>
-        {/* Middle-left white squiggle */}
-        <div className="absolute top-[45%] left-4 sm:left-6 lg:left-8 xl:left-40 w-14 sm:w-20 lg:w-24 xl:w-60 opacity-90">
-          <Image src="/images/Home/hero/left-middle-elemtnt.png" alt="" width={707} height={704} quality={80} className="w-full h-auto" />
-        </div>
-        {/* Middle-right white triangle */}
-        <div className="absolute top-[45%] right-4 sm:right-6 lg:right-8 xl:right-40 w-14 sm:w-20 lg:w-24 xl:w-52 opacity-90">
-          <Image src="/images/Home/hero/right-middle-element.png" alt="" width={756} height={756} quality={80} className="w-full h-auto" />
-        </div>
-        {/* Bottom-left white donut */}
-        <div className="absolute bottom-10 -left-4 lg:left-10 w-24 sm:w-32 lg:w-44 xl:w-60 opacity-95">
-          <Image src="/images/Home/hero/left-bottom-elemtnt.png" alt="" width={1375} height={1371} quality={80} className="w-full h-auto" />
-        </div>
-        {/* Bottom-right white squiggle */}
-        <div className="absolute bottom-10 -right-4 lg:right-10 w-24 sm:w-28 lg:w-40 xl:w-52 opacity-95">
-          <Image src="/images/Home/hero/right-bottom-element.png" alt="" width={1265} height={1327} quality={80} className="w-full h-auto" />
-        </div>
-      </div>
+      <HeroParticles />
 
       <div className="relative z-10 flex flex-col items-center text-center px-4 pt-20 sm:pt-24 md:pt-24">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[58px] font-extrabold text-white tracking-tight leading-[1.12] max-w-4xl mx-auto">
+        <motion.h1
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.65, ease: [0.21, 0.47, 0.32, 0.98] }}
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-[58px] font-extrabold text-white tracking-tight leading-[1.12] max-w-4xl mx-auto"
+        >
           Get Access to Hundreds
           <span className="block mt-1 sm:mt-2">Courses Available</span>
-        </h1>
+        </motion.h1>
 
-        <p className="mt-2 sm:mt-3 text-xs sm:text-sm md:text-base text-white/90 max-w-2xl mx-auto font-normal leading-relaxed">
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.65, delay: 0.15, ease: [0.21, 0.47, 0.32, 0.98] }}
+          className="mt-2 sm:mt-3 text-xs sm:text-sm md:text-base text-white/90 max-w-2xl mx-auto font-normal leading-relaxed"
+        >
           Unlock your creativity, gain valuable knowledge, and grow your business with our wide range of courses.
-        </p>
+        </motion.p>
 
-        <form
+        <motion.form
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.55, delay: 0.3, ease: [0.21, 0.47, 0.32, 0.98] }}
           onSubmit={handleSearch}
           className="mt-4 sm:mt-5 flex flex-row items-center justify-center gap-2.5 sm:gap-3 w-full max-w-[92%] sm:max-w-lg mx-auto"
         >
@@ -94,55 +83,89 @@ export function HeroSection() {
           <Button
             type="submit"
             variant="secondary"
-            className="rounded-full px-6 sm:px-8 py-2.5 sm:py-3.5 text-xs sm:text-sm font-bold bg-[#C6F226] text-gray-950 hover:bg-[#b5e01f] shadow-lg shrink-0 h-auto cursor-pointer transition-transform hover:scale-105 active:scale-95"
+            className="rounded-full px-6 sm:px-8 py-2.5 sm:py-3.5 text-xs sm:text-sm font-bold bg-secondary text-secondary-foreground hover:bg-secondary-hover shadow-lg shrink-0 h-auto cursor-pointer transition-transform hover:scale-105 active:scale-95"
           >
             Search
           </Button>
-        </form>
+        </motion.form>
       </div>
 
       <div className="relative z-10 w-full max-w-5xl mx-auto mt-3 sm:mt-4 md:mt-5 px-2 sm:px-4 flex items-end justify-center">
         <div className="relative w-full flex items-end justify-center">
           <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[120%] sm:w-[110%] md:w-[105%] max-w-[1200px] z-0 pointer-events-none select-none">
-            <Image
-              src="/images/Home/hero/center-avater-round-bg.png"
-              alt=""
-              width={4596}
-              height={1768}
-              priority
-              className="w-full h-auto object-contain block"
-            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.94 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.7, delay: 0.25 }}
+              className="w-full h-auto flex items-end justify-center"
+            >
+              <Image
+                src="/images/Home/hero/center-avater-round-bg.png"
+                alt=""
+                width={4596}
+                height={1768}
+                priority
+                className="w-full h-auto object-contain block"
+              />
+            </motion.div>
           </div>
 
           <div className="relative z-10 w-[100%] sm:w-[88%] md:w-[74%] lg:w-[68%] max-w-[720px] pointer-events-none select-none">
-            <Image
-              src="/images/Home/hero/centeredAvaterImg.png"
-              alt="Student learning with laptop"
-              width={1400}
-              height={999}
-              priority
-              className="w-full h-auto object-contain block"
-            />
+            <motion.div
+              initial={{ opacity: 0, y: 28 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.35 }}
+              className="w-full h-auto"
+            >
+              <Image
+                src="/images/Home/hero/centeredAvaterImg.png"
+                alt="Student learning with laptop"
+                width={1400}
+                height={999}
+                priority
+                className="w-full h-auto object-contain block"
+              />
+            </motion.div>
           </div>
 
-          <div className="absolute top-[16%] sm:top-[22%] left-[1%] sm:left-[6%] md:left-[10%] lg:left-[12%] z-20 bg-white rounded-xl sm:rounded-2xl shadow-xl border border-gray-100/90 p-2.5 sm:p-3.5 md:p-4">
+          <motion.div
+            initial={{ opacity: 0, x: -36 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.5, ease: 'easeOut' }}
+            className="absolute top-[16%] sm:top-[22%] left-[1%] sm:left-[6%] md:left-[10%] lg:left-[12%] z-20 bg-white rounded-xl sm:rounded-2xl shadow-xl border border-gray-100/90 p-2.5 sm:p-3.5 md:p-4"
+          >
             <p className="text-xs sm:text-sm font-bold text-gray-900 leading-tight">UI/UX Design</p>
             <p className="text-[10px] sm:text-xs font-medium text-gray-500 mt-1 whitespace-nowrap">
               200 Courses &bull; 1000+ Students
             </p>
-          </div>
+          </motion.div>
 
-          <div className="absolute top-[12%] sm:top-[18%] right-[1%] sm:right-[6%] md:right-[10%] lg:right-[12%] z-20 bg-white rounded-xl sm:rounded-2xl shadow-xl border border-gray-100/90 p-3 sm:p-4 md:p-5 min-w-[125px] sm:min-w-[160px] md:min-w-[190px]">
+          <motion.div
+            initial={{ opacity: 0, x: 36 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.55, ease: 'easeOut' }}
+            className="absolute top-[12%] sm:top-[18%] right-[1%] sm:right-[6%] md:right-[10%] lg:right-[12%] z-20 bg-white rounded-xl sm:rounded-2xl shadow-xl border border-gray-100/90 p-3 sm:p-4 md:p-5 min-w-[125px] sm:min-w-[160px] md:min-w-[190px]"
+          >
             <p className="text-[10px] sm:text-xs font-medium text-gray-500 leading-none">Learning Progress</p>
             <p className="text-lg sm:text-2xl md:text-3xl font-extrabold text-gray-900 mt-1.5 sm:mt-2 leading-none tracking-tight">
               55%
             </p>
             <div className="mt-2.5 sm:mt-3 w-full h-1.5 sm:h-2 rounded-full bg-gray-100 overflow-hidden">
-              <div className="h-full rounded-full bg-[#C6F226] w-[55%]" />
+              <motion.div
+                initial={{ width: 0 }}
+                animate={{ width: '55%' }}
+                transition={{ duration: 0.9, delay: 0.8, ease: 'easeOut' }}
+                className="h-full rounded-full bg-secondary"
+              />
             </div>
-          </div>
+          </motion.div>
 
-          <div className="absolute bottom-[6%] sm:bottom-[10%] left-[1%] sm:left-[4%] md:left-[8%] lg:left-[9%] z-20 bg-white rounded-xl sm:rounded-2xl shadow-xl border border-gray-100/90 p-2.5 sm:p-3.5 md:p-4 min-w-[140px] sm:min-w-[175px] md:min-w-[205px]">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.65, ease: 'easeOut' }}
+            className="absolute bottom-[6%] sm:bottom-[10%] left-[1%] sm:left-[4%] md:left-[8%] lg:left-[9%] z-20 bg-white rounded-xl sm:rounded-2xl shadow-xl border border-gray-100/90 p-2.5 sm:p-3.5 md:p-4 min-w-[140px] sm:min-w-[175px] md:min-w-[205px]"
+          >
             <p className="text-xs sm:text-sm font-bold text-gray-900 leading-none">Happy Students</p>
             <div className="flex items-center gap-1.5 mt-1 sm:mt-1.5 text-[11px] sm:text-xs font-semibold text-gray-600">
               <span>4.5</span>
@@ -155,11 +178,11 @@ export function HeroSection() {
                   <Image src={src} alt="Student avatar" fill sizes="28px" className="object-cover" />
                 </div>
               ))}
-              <span className="h-6 sm:h-7 px-1.5 sm:px-2 rounded-full border-2 border-white bg-[#C6F226] text-gray-950 text-[9px] sm:text-[10px] font-extrabold flex items-center justify-center shrink-0 shadow-sm ml-0.5">
+              <span className="h-6 sm:h-7 px-1.5 sm:px-2 rounded-full border-2 border-white bg-secondary text-secondary-foreground text-[9px] sm:text-[10px] font-extrabold flex items-center justify-center shrink-0 shadow-sm ml-0.5">
                 2K+
               </span>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
