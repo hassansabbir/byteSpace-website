@@ -1,12 +1,13 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter } from 'next/font/google';
+import { Plus_Jakarta_Sans } from 'next/font/google';
 import { siteConfig } from '@/config/site';
 import './globals.css';
 
-const inter = Inter({
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-sans',
+  weight: ['400', '500', '600', '700', '800'],
 });
 
 export const metadata: Metadata = {
@@ -33,6 +34,20 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     creator: '@bytespace',
   },
+  icons: {
+    icon: [
+      {
+        url: '/favicon.png',
+        type: 'image/png',
+      },
+      {
+        url: '/favicon.ico',
+        sizes: 'any',
+      },
+    ],
+    shortcut: '/favicon.png',
+    apple: '/favicon.png',
+  },
   robots: {
     index: true,
     follow: true,
@@ -40,7 +55,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#1A56DB',
+  themeColor: '#003BE2',
   width: 'device-width',
   initialScale: 1,
 };
@@ -51,8 +66,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="min-h-screen bg-background font-sans antialiased text-foreground">
+    <html lang="en" className={`${plusJakartaSans.variable} ${plusJakartaSans.className}`}>
+      <body className={`${plusJakartaSans.className} font-sans min-h-screen bg-background antialiased text-foreground`}>
         {children}
       </body>
     </html>

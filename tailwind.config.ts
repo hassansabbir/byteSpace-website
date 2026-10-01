@@ -58,7 +58,7 @@ const config: Config = {
         full: 'var(--radius-full)',
       },
       fontFamily: {
-        sans: ['var(--font-sans)', 'system-ui', '-apple-system', 'sans-serif'],
+        sans: ['var(--font-sans)', 'Plus Jakarta Sans', 'system-ui', '-apple-system', 'sans-serif'],
       },
     },
   },
